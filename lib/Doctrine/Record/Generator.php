@@ -46,7 +46,8 @@ abstract class Doctrine_Record_Generator extends Doctrine_Record_Abstract
         'pluginTable'    => false,
         'children'       => array(),
         'cascadeDelete'  => true,
-        'appLevelDelete' => false
+        'appLevelDelete' => false,
+        'connection'     => false
     );
 
     /**
@@ -431,6 +432,8 @@ abstract class Doctrine_Record_Generator extends Doctrine_Record_Abstract
         $definition['columns'] = $table->getColumns();
         $definition['tableName'] = $table->getTableName();
         $definition['actAs'] = $table->getTemplates();
+        $definition['connection'] = $this->_options['connection'];
+        $definition['connectionClassName'] = $table->getClassnameToReturn();
 
         return $this->generateClass($definition);
     }
